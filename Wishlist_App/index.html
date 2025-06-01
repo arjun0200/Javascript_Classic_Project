@@ -1,22 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wishlist</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Page Title</title>
+    <style>
+        @import url("https://uilight.netlify.app/main.css");
+    </style>
 </head>
+
 <body>
-    <main class="main">
-        <h1 class="heading-1">Your Wishlist</h1>
-        <form class="todo-form">
-          <input class="input" placeholder="Add your wishlist here..." />
-          <button class="button btn-primary cursor">Add</button>
-        </form>
-        <div class="todos-container"></div>
-      </main>
-      <script type="module" src="index.js"></script>
-      
+    <div id="app">
+        <div class="card-horizontal d-flex shadow">
+            <div class="card-hori-image-container relative">
+                <img class="card-image" src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/6563a683-384a-4899-a102-7f61a387baae/air-jordan-1-mid-older-shoes-hwb3kx.png" alt="shoes" />
+                <small class="c-badge bg-primary absolute left-0">Trending</small>
+            </div>
+            <div class="card-details d-flex direction-column">
+                <div class="card-title">Premium Collection</div>
+                <div class="card-description">
+                    <p class="card-des">Men Sneakers</p>
+                    <p class="card-price">
+                        Rs.
+                        <span id="new-price">18495</span>
+                        <span class="price-strike-through padding-all-8">Rs. 22499</span>
+                        <span class="discount padding-all-8">(30% OFF)</span>
+                    </p>
+                </div>
+                <div class="quantity-container d-flex gap">
+                    <p class="q-title">Quantity:</p>
+                    <div class="count-container d-flex align-center gap">
+                        <button id="dec" class="count">-</button>
+                        <span id="count" class="count-value">1</span>
+                        <button id="inc" class="count">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="price-component">
+            Total:
+            <p id="total-price">18495</p>
+        </div>
+    </div>
+    <script>
+        let incBtn = document.getElementById("inc");
+        let decBtn = document.getElementById("dec");
+        let count = document.getElementById("count");
+        let total = document.getElementById("total-price");
+        let newPrice = document.getElementById("new-price");
+        
+        let itemCount = 1;
+        
+        incBtn.addEventListener("click", () => {
+          itemCount++;
+          count.innerText = itemCount;
+          total.innerText = `Rs. ${newPrice.innerText * itemCount}`;
+          decBtn.removeAttribute("disabled");
+        });
+        decBtn.addEventListener("click", () => {
+          if (itemCount === 1) {
+            decBtn.setAttribute("disabled", true);
+          } else {
+            decBtn.removeAttribute("disabled");
+            itemCount--;
+            count.innerText = itemCount;
+            total.innerText = `Rs. ${newPrice.innerText * itemCount}`;
+          }
+        });
+        
+    </script>
 </body>
+
 </html>
